@@ -1,0 +1,1047 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI 影像作品集，包含历史叙事、都市悬疑与家庭对话三类短片创作。">
+  <title>AI 影像作品集</title>
+  <style>
+    :root {
+      --ink: #171717;
+      --ink-soft: #3a3835;
+      --paper: #f2eee5;
+      --paper-light: #faf8f2;
+      --line: rgba(23, 23, 23, 0.16);
+      --accent: #9b3027;
+      --muted: #777169;
+      --serif: "Songti SC", "STSong", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, serif;
+      --sans: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img,
+    video {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      position: fixed;
+      z-index: 20;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px clamp(22px, 4vw, 64px);
+      color: var(--paper-light);
+      background: linear-gradient(180deg, rgba(10, 10, 10, 0.72), transparent);
+      pointer-events: none;
+      transition: background 240ms ease, backdrop-filter 240ms ease;
+    }
+
+    .topbar.scrolled {
+      background: rgba(16, 16, 16, 0.9);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+    }
+
+    .brand,
+    .topbar nav {
+      pointer-events: auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.65);
+      border-radius: 50%;
+      font-family: var(--serif);
+      font-size: 13px;
+    }
+
+    .topbar nav {
+      display: flex;
+      gap: 28px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(330px, 0.82fr);
+      overflow: hidden;
+      background: #111;
+      color: var(--paper-light);
+    }
+
+    .hero-media {
+      position: relative;
+      min-height: 100svh;
+      overflow: hidden;
+    }
+
+    .hero-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(10, 10, 10, 0.12), rgba(10, 10, 10, 0.1) 55%, #111 100%),
+        linear-gradient(0deg, rgba(10, 10, 10, 0.7), transparent 42%);
+      pointer-events: none;
+    }
+
+    .hero-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 22%;
+      filter: saturate(0.8) contrast(1.03);
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 130px clamp(30px, 5.5vw, 82px) clamp(42px, 7vh, 88px);
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 22px;
+      color: rgba(255,255,255,0.72);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    .hero h1 {
+      max-width: 7em;
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(54px, 6.5vw, 108px);
+      font-weight: 500;
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+    }
+
+    .hero h1 span {
+      display: block;
+      margin-top: 0.18em;
+      color: #d8c8b4;
+      font-size: 0.47em;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+    }
+
+    .hero-intro {
+      max-width: 480px;
+      margin: 34px 0 0;
+      color: rgba(255,255,255,0.76);
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      margin-top: 34px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.62);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+    }
+
+    .hero-index {
+      position: absolute;
+      right: 28px;
+      bottom: 24px;
+      z-index: 2;
+      font-family: var(--serif);
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      writing-mode: vertical-rl;
+      letter-spacing: 0.2em;
+    }
+
+    .section {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: clamp(78px, 11vw, 150px) clamp(22px, 5vw, 76px);
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.25fr);
+      gap: clamp(44px, 8vw, 130px);
+      align-items: start;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-label {
+      color: var(--accent);
+      font-family: var(--serif);
+      font-size: 13px;
+      letter-spacing: 0.16em;
+    }
+
+    .manifesto {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(30px, 4vw, 60px);
+      font-weight: 500;
+      line-height: 1.34;
+      letter-spacing: -0.035em;
+    }
+
+    .manifesto em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .intro-note {
+      max-width: 530px;
+      margin: 32px 0 0 auto;
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .projects-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: clamp(52px, 8vw, 94px);
+    }
+
+    .projects-heading h2,
+    .method-heading h2 {
+      margin: 14px 0 0;
+      font-family: var(--serif);
+      font-size: clamp(38px, 5vw, 72px);
+      font-weight: 500;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .projects-heading p {
+      max-width: 350px;
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .project {
+      --accent-project: var(--accent);
+      margin-bottom: clamp(92px, 14vw, 190px);
+    }
+
+    .project:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.6fr);
+      gap: clamp(32px, 6vw, 92px);
+      align-items: end;
+    }
+
+    .project-visual {
+      position: relative;
+      min-height: 560px;
+      background: #d9d2c6;
+      overflow: hidden;
+    }
+
+    .project-visual.portrait {
+      min-height: min(78vw, 790px);
+      max-height: 850px;
+    }
+
+    .project-visual > img.main-image {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      object-fit: cover;
+      transition: transform 900ms cubic-bezier(.2,.7,.2,1);
+    }
+
+    .project:hover .project-visual > img.main-image {
+      transform: scale(1.018);
+    }
+
+    .project-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 58%, rgba(0,0,0,0.45));
+      pointer-events: none;
+    }
+
+    .visual-caption {
+      position: absolute;
+      z-index: 2;
+      left: 24px;
+      bottom: 20px;
+      color: rgba(255,255,255,0.8);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+    }
+
+    .project-number {
+      position: absolute;
+      z-index: 3;
+      left: 20px;
+      top: 6px;
+      color: rgba(255,255,255,0.8);
+      font-family: var(--serif);
+      font-size: clamp(64px, 9vw, 132px);
+      line-height: 1;
+      mix-blend-mode: soft-light;
+    }
+
+    .project-copy {
+      padding-bottom: 8px;
+    }
+
+    .project-kicker {
+      margin: 0 0 18px;
+      color: var(--accent-project);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .project h3 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(40px, 5vw, 72px);
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+    }
+
+    .project-en {
+      margin: 6px 0 28px;
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+    }
+
+    .project-description {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 26px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .tags li {
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+    }
+
+    .project-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      margin: 34px 0 0;
+      border: 1px solid var(--line);
+      background: var(--line);
+    }
+
+    .stat {
+      min-height: 94px;
+      padding: 17px 14px;
+      background: var(--paper);
+    }
+
+    .stat strong {
+      display: block;
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.4;
+    }
+
+    .project-detail {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .clip-card {
+      background: #111;
+      color: var(--paper-light);
+    }
+
+    .clip-card video {
+      width: 100%;
+      max-height: 680px;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+      background: #050505;
+    }
+
+    .clip-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 15px 18px 17px;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+    }
+
+    .clip-meta span:last-child {
+      color: rgba(255,255,255,0.52);
+    }
+
+    .detail-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .detail-gallery figure {
+      position: relative;
+      min-height: 210px;
+      margin: 0;
+      overflow: hidden;
+      background: #d9d2c6;
+    }
+
+    .detail-gallery figure:first-child {
+      grid-row: 1 / 3;
+    }
+
+    .detail-gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.86);
+    }
+
+    .detail-gallery figcaption {
+      position: absolute;
+      left: 14px;
+      bottom: 12px;
+      padding: 5px 8px;
+      color: #fff;
+      background: rgba(0,0,0,0.48);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+    }
+
+    .method-section {
+      padding: clamp(80px, 12vw, 150px) clamp(22px, 5vw, 76px);
+      color: var(--paper-light);
+      background: var(--ink);
+    }
+
+    .method-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .method-heading {
+      display: grid;
+      grid-template-columns: 0.75fr 1.25fr;
+      gap: clamp(42px, 8vw, 120px);
+      align-items: start;
+      margin-bottom: clamp(54px, 8vw, 92px);
+    }
+
+    .method-heading .section-label {
+      color: #c99487;
+    }
+
+    .method-heading p {
+      max-width: 500px;
+      margin: 22px 0 0 auto;
+      color: rgba(255,255,255,0.58);
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      border-top: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .step {
+      min-height: 190px;
+      padding: 24px 18px 24px 0;
+      border-right: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .step:last-child {
+      border-right: 0;
+    }
+
+    .step-index {
+      color: #c99487;
+      font-family: var(--serif);
+      font-size: 13px;
+    }
+
+    .step h4 {
+      margin: 42px 0 10px;
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 500;
+    }
+
+    .step p {
+      margin: 0;
+      color: rgba(255,255,255,0.52);
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .capabilities {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 58px;
+    }
+
+    .capability {
+      padding-top: 18px;
+      border-top: 2px solid #c99487;
+    }
+
+    .capability strong {
+      display: block;
+      font-family: var(--serif);
+      font-size: 21px;
+      font-weight: 500;
+    }
+
+    .capability span {
+      display: block;
+      margin-top: 12px;
+      color: rgba(255,255,255,0.52);
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .closing {
+      padding: clamp(86px, 12vw, 150px) clamp(22px, 5vw, 76px);
+      text-align: center;
+      background: var(--paper-light);
+    }
+
+    .closing .section-label {
+      display: inline-block;
+    }
+
+    .closing h2 {
+      max-width: 850px;
+      margin: 24px auto 0;
+      font-family: var(--serif);
+      font-size: clamp(36px, 5vw, 72px);
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.04em;
+    }
+
+    .closing p {
+      max-width: 620px;
+      margin: 28px auto 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .closing-rule {
+      width: 1px;
+      height: 70px;
+      margin: 44px auto 0;
+      background: var(--line);
+    }
+
+    footer {
+      padding: 24px clamp(22px, 5vw, 76px);
+      color: rgba(255,255,255,0.52);
+      background: var(--ink);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 800ms ease, transform 800ms cubic-bezier(.2,.7,.2,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-media {
+        position: absolute;
+        inset: 0;
+      }
+
+      .hero-media::after {
+        background: linear-gradient(180deg, rgba(8,8,8,0.18), rgba(8,8,8,0.74) 53%, #111 90%);
+      }
+
+      .hero-copy {
+        min-height: 100svh;
+        justify-content: flex-end;
+        padding-top: 300px;
+      }
+
+      .hero h1 {
+        max-width: 8em;
+      }
+
+      .intro,
+      .project-grid,
+      .project-detail,
+      .method-heading {
+        grid-template-columns: 1fr;
+      }
+
+      .project-visual,
+      .project-visual.portrait {
+        min-height: 66vh;
+        max-height: none;
+      }
+
+      .project-copy {
+        max-width: 680px;
+      }
+
+      .process {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .step:nth-child(3) {
+        border-right: 0;
+      }
+
+      .step:nth-child(-n+3) {
+        border-bottom: 1px solid rgba(255,255,255,0.12);
+      }
+
+      .capabilities {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar nav {
+        display: none;
+      }
+
+      .brand {
+        color: rgba(255,255,255,0.8);
+      }
+
+      .hero-copy {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .hero-intro {
+        font-size: 13px;
+      }
+
+      .intro-note {
+        margin-left: 0;
+      }
+
+      .projects-heading {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .project-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .stat {
+        min-height: auto;
+      }
+
+      .detail-gallery {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 260px 180px;
+      }
+
+      .detail-gallery figure:first-child {
+        grid-column: 1 / 3;
+        grid-row: auto;
+      }
+
+      .process,
+      .capabilities {
+        grid-template-columns: 1fr;
+      }
+
+      .step {
+        min-height: 130px;
+        border-right: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.12);
+      }
+
+      .step h4 {
+        margin-top: 20px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .project-visual > img.main-image {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="回到首页">
+      <span class="brand-mark">A</span>
+      <span>AI IMAGE STUDIES</span>
+    </a>
+    <nav aria-label="页面导航">
+      <a href="#works">作品</a>
+      <a href="#process">创作方法</a>
+      <a href="#about">关于</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-media">
+        <img src="assets/images/qiujin-hero.jpg" alt="《秋瑾》历史短片角色设定画面">
+      </div>
+      <div class="hero-copy">
+        <p class="eyebrow">Portfolio 2026</p>
+        <h1 id="hero-title">AI 影像<br>作品集<span>角色 · 场景 · 分镜 · 短片</span></h1>
+        <p class="hero-intro">从文字构思到可观看的影像，我关注人物能否在连续镜头中保持可信，场景能否承担情绪，以及每一个画面是否真正服务于故事。</p>
+        <div class="hero-meta" aria-label="作品门类">
+          <span>历史叙事</span>
+          <span>都市悬疑</span>
+          <span>家庭对话</span>
+          <span>竖屏短剧</span>
+        </div>
+      </div>
+      <div class="hero-index">PORTFOLIO / 01</div>
+    </section>
+
+    <section class="section intro reveal" aria-labelledby="statement-title">
+      <div>
+        <span class="section-label">CREATIVE STATEMENT</span>
+      </div>
+      <div>
+        <h2 id="statement-title" class="manifesto">我以<em>角色一致性</em>守住人物，以<em>镜头节奏</em>托住叙事，让 AI 生成不止停留在单张画面。</h2>
+        <p class="intro-note">三组作品覆盖晚清历史、都市悬疑与当代家庭题材。每组均从人物设定与空间资产开始，再进入分镜、视频生成和声音调整，完整呈现从视觉概念到成片的创作链路。</p>
+      </div>
+    </section>
+
+    <section class="section" id="works" aria-labelledby="works-title">
+      <div class="projects-heading reveal">
+        <div>
+          <span class="section-label">SELECTED WORKS</span>
+          <h2 id="works-title">代表作品</h2>
+        </div>
+        <p>每组作品展示代表画面与短片段。短片为无声自动播放内容，建议开启声音完整观看。</p>
+      </div>
+
+      <article class="project reveal" aria-labelledby="project-qiujin">
+        <div class="project-grid">
+          <div class="project-visual portrait">
+            <span class="project-number">01</span>
+            <img class="main-image" src="assets/images/qiujin-hero.jpg" alt="秋瑾在旧宅中的人物设定画面">
+            <span class="visual-caption">角色设定 / CHARACTER DESIGN</span>
+          </div>
+          <div class="project-copy">
+            <p class="project-kicker">历史叙事 · 竖屏短剧</p>
+            <h3 id="project-qiujin">秋瑾</h3>
+            <p class="project-en">THE IDEALIST / 1907</p>
+            <p class="project-description">从晚清旧宅里的个人困境，到绍兴学堂中的家国抉择。作品以克制的表情、稳定的服化道与同一人物面容推进情绪，让历史人物不成为口号，而是在冲突与停顿中完成选择。</p>
+            <ul class="tags" aria-label="项目标签">
+              <li>历史人物</li>
+              <li>角色一致性</li>
+              <li>多场景叙事</li>
+              <li>15 秒镜头段落</li>
+            </ul>
+            <div class="project-stats" aria-label="项目数据">
+              <div class="stat"><strong>12</strong><span>分段镜头</span></div>
+              <div class="stat"><strong>9:16</strong><span>竖屏画幅</span></div>
+              <div class="stat"><strong>1907</strong><span>故事年代</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="project-detail">
+          <div class="clip-card">
+            <video controls playsinline preload="metadata" poster="assets/images/qiujin-ayuan.jpg">
+              <source src="assets/videos/qiujin-classroom.mp4" type="video/mp4">
+              你的浏览器暂不支持视频播放。
+            </video>
+            <div class="clip-meta"><span>片段 / 学堂对话</span><span>VIDEO 01</span></div>
+          </div>
+          <div class="detail-gallery" aria-label="秋瑾项目视觉资产">
+            <figure><img src="assets/images/qiujin-study.jpg" alt="秋瑾旧宅书房与小院门场景"><figcaption>SCENE / 旧宅空间</figcaption></figure>
+            <figure><img src="assets/images/qiujin-school.jpg" alt="1907 年绍兴学堂教室场景"><figcaption>SCENE / 绍兴学堂</figcaption></figure>
+            <figure><img src="assets/images/qiujin-ayuan.jpg" alt="阿沅角色设定"><figcaption>CHARACTER / 阿沅</figcaption></figure>
+          </div>
+        </div>
+      </article>
+
+      <article class="project reveal" aria-labelledby="project-humanity">
+        <div class="project-grid">
+          <div class="project-visual">
+            <span class="project-number">02</span>
+            <img class="main-image" src="assets/images/humanity-hero.jpg" alt="《人间不奉神》雨夜接来电画面">
+            <span class="visual-caption">首场戏 / OPENING SCENE</span>
+          </div>
+          <div class="project-copy">
+            <p class="project-kicker">都市悬疑 · 氛围叙事</p>
+            <h3 id="project-humanity">人间不奉神</h3>
+            <p class="project-en">NO GODS IN THE HUMAN WORLD</p>
+            <p class="project-description">失踪三年的父亲在雨夜来电，窗外却出现无脸的黑衣人。作品从一通电话建立不安，用冷色窗光、手机光源与空间纵深控制信息释放，让超自然危机逐步侵入日常私人空间。</p>
+            <ul class="tags" aria-label="项目标签">
+              <li>都市悬疑</li>
+              <li>雨夜氛围</li>
+              <li>镜头连续性</li>
+              <li>超自然设定</li>
+            </ul>
+            <div class="project-stats" aria-label="项目数据">
+              <div class="stat"><strong>1</strong><span>核心场景</span></div>
+              <div class="stat"><strong>3+</strong><span>角色与异象</span></div>
+              <div class="stat"><strong>冷光</strong><span>视觉基调</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="project-detail">
+          <div class="clip-card">
+            <video controls playsinline preload="metadata" poster="assets/images/humanity-hero.jpg">
+              <source src="assets/videos/humanity-rain.mp4" type="video/mp4">
+              你的浏览器暂不支持视频播放。
+            </video>
+            <div class="clip-meta"><span>片段 / 雨夜来电</span><span>VIDEO 02</span></div>
+          </div>
+          <div class="detail-gallery" aria-label="人间不奉神项目视觉资产">
+            <figure><img src="assets/images/humanity-bedroom.jpg" alt="雨夜都市极简卧室俯视场景"><figcaption>SCENE / 雨夜卧室</figcaption></figure>
+            <figure><img src="assets/images/humanity-figure.jpg" alt="陆沉舟角色三视图"><figcaption>CHARACTER / 陆沉舟</figcaption></figure>
+            <figure><img src="assets/images/humanity-blackcoat.jpg" alt="黑衣雨衣人角色设定"><figcaption>CHARACTER / 黑衣人</figcaption></figure>
+          </div>
+        </div>
+      </article>
+
+      <article class="project reveal" aria-labelledby="project-family">
+        <div class="project-grid">
+          <div class="project-visual">
+            <span class="project-number">03</span>
+            <img class="main-image" src="assets/images/family-hero.jpg" alt="家庭对话短片中的林悦与长辈">
+            <span class="visual-caption">人物关系 / RELATIONSHIPS</span>
+          </div>
+          <div class="project-copy">
+            <p class="project-kicker">当代家庭 · 情绪表演</p>
+            <h3 id="project-family">都是为你好</h3>
+            <p class="project-en">FOR YOUR OWN GOOD</p>
+            <p class="project-description">在熟悉的家庭客厅里，一句“都是为你好”连接起代际之间的关心、压力与无法说出口的边界。创作重点是人物表情反应、对白节奏和生活空间细节，让冲突在克制的日常中自然发生。</p>
+            <ul class="tags" aria-label="项目标签">
+              <li>家庭关系</li>
+              <li>对白短片</li>
+              <li>声音表演</li>
+              <li>生活化场景</li>
+            </ul>
+            <div class="project-stats" aria-label="项目数据">
+              <div class="stat"><strong>4</strong><span>家庭成员</span></div>
+              <div class="stat"><strong>15s</strong><span>竖屏成片</span></div>
+              <div class="stat"><strong>对白</strong><span>声音驱动</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="project-detail">
+          <div class="clip-card">
+            <video controls playsinline preload="metadata" poster="assets/images/family-hero.jpg">
+              <source src="assets/videos/family-15s.mp4" type="video/mp4">
+              你的浏览器暂不支持视频播放。
+            </video>
+            <div class="clip-meta"><span>片段 / 家庭对话</span><span>VIDEO 03</span></div>
+          </div>
+          <div class="detail-gallery" aria-label="都是为你好项目视觉资产">
+            <figure><img src="assets/images/family-room.jpg" alt="家庭客厅场景全景"><figcaption>SCENE / 家庭客厅</figcaption></figure>
+            <figure><img src="assets/images/family-linyue.jpg" alt="林悦角色三视图"><figcaption>CHARACTER / 林悦</figcaption></figure>
+            <figure><img src="assets/images/family-mother.jpg" alt="母亲角色三视图"><figcaption>CHARACTER / 母亲</figcaption></figure>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="method-section" id="process" aria-labelledby="process-title">
+      <div class="method-inner">
+        <div class="method-heading reveal">
+          <div>
+            <span class="section-label">WORKFLOW</span>
+            <h2 id="process-title">创作方法</h2>
+          </div>
+          <p>先确定故事和视觉规则，再生成素材。每一轮生成都以人物面容、服装、景别和轴线为校验点，减少后续镜头之间的漂移，让作品能够持续发展成完整短片。</p>
+        </div>
+        <div class="process reveal" aria-label="创作流程">
+          <div class="step"><span class="step-index">01</span><h4>叙事拆解</h4><p>明确人物目标、冲突节点与镜头时长。</p></div>
+          <div class="step"><span class="step-index">02</span><h4>视觉设定</h4><p>建立人物、服装、场景与光线基准。</p></div>
+          <div class="step"><span class="step-index">03</span><h4>分镜设计</h4><p>规划轴线、景别、动作衔接与情绪递进。</p></div>
+          <div class="step"><span class="step-index">04</span><h4>视频生成</h4><p>锁定关键帧，控制表演和镜头运动。</p></div>
+          <div class="step"><span class="step-index">05</span><h4>声音剪辑</h4><p>配合对白、环境声与节奏完成叙事。</p></div>
+          <div class="step"><span class="step-index">06</span><h4>成片校验</h4><p>检查连续性、画面细节与观看节奏。</p></div>
+        </div>
+        <div class="capabilities reveal" aria-label="创作能力">
+          <div class="capability"><strong>故事与脚本</strong><span>从主题、人物关系到分镜节奏的结构化表达。</span></div>
+          <div class="capability"><strong>一致性与控制</strong><span>维持角色面容、服装、场景和镜头轴线。</span></div>
+          <div class="capability"><strong>视觉资产</strong><span>人物三视图、场景概念图与关键帧设计。</span></div>
+          <div class="capability"><strong>生成与后期</strong><span>视频生成、对白、环境声和竖屏成片整合。</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing" id="about" aria-labelledby="about-title">
+      <span class="section-label reveal">ABOUT THIS PORTFOLIO</span>
+      <h2 id="about-title" class="reveal">用一套可执行的视觉规则，把想法做成能被看见的故事。</h2>
+      <p class="reveal">本作品集精选自 AI 影像学习与创作期间完成的三组项目。页面中的图片均为角色、场景与关键帧资产，视频为对应作品片段。</p>
+      <div class="closing-rule" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>AI IMAGE PORTFOLIO / 2026</span>
+      <span>角色设定 · 场景资产 · 分镜短片</span>
+    </div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll(".reveal");
+    const topbar = document.querySelector(".topbar");
+
+    const updateTopbar = () => {
+      topbar.classList.toggle("scrolled", window.scrollY > 24);
+    };
+
+    updateTopbar();
+    window.addEventListener("scroll", updateTopbar, { passive: true });
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      reveals.forEach((element) => observer.observe(element));
+    } else {
+      reveals.forEach((element) => element.classList.add("visible"));
+    }
+  </script>
+</body>
+</html>
