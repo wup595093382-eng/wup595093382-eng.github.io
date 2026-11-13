@@ -1,0 +1,274 @@
+{
+  "meta": {
+    "pageTitle": "AI 影像作品集",
+    "description": "AI 影像作品集，包含历史叙事、都市悬疑与家庭对话三类短片创作。"
+  },
+  "site": {
+    "brand": "AI IMAGE STUDIES",
+    "footerLabel": "AI IMAGE PORTFOLIO / 2026",
+    "navigation": [
+      {
+        "label": "作品",
+        "href": "#works"
+      },
+      {
+        "label": "创作方法",
+        "href": "#process"
+      },
+      {
+        "label": "联系",
+        "href": "#about"
+      }
+    ]
+  },
+  "hero": {
+    "eyebrow": "Portfolio 2026",
+    "title": "AI 影像\n作品集",
+    "subtitle": "角色 · 场景 · 分镜 · 短片",
+    "intro": "从文字构思到可观看的影像，我关注人物能否在连续镜头中保持可信，场景能否承担情绪，以及每一个画面是否真正服务于故事。",
+    "meta": [
+      "历史叙事",
+      "都市悬疑",
+      "家庭对话",
+      "竖屏短剧"
+    ],
+    "index": "PORTFOLIO / 01"
+  },
+  "statement": {
+    "label": "CREATIVE STATEMENT",
+    "title": "我以角色一致性守住人物，以镜头节奏托住叙事，让 AI 生成不止停留在单张画面。",
+    "note": "三组作品覆盖晚清历史、都市悬疑与当代家庭题材。每组均从人物设定与空间资产开始，再进入分镜、视频生成和声音调整，完整呈现从视觉概念到成片的创作链路。"
+  },
+  "works": {
+    "label": "SELECTED WORKS",
+    "title": "代表作品",
+    "note": "每组作品展示代表画面与短片段。短片为无声自动播放内容，建议开启声音完整观看。"
+  },
+  "projects": [
+    {
+      "number": "01",
+      "kicker": "历史叙事 · 竖屏短剧",
+      "title": "秋瑾",
+      "english": "THE IDEALIST / 1907",
+      "description": "从晚清旧宅里的个人困境，到绍兴学堂中的家国抉择。作品以克制的表情、稳定的服化道与同一人物面容推进情绪，让历史人物不成为口号，而是在冲突与停顿中完成选择。",
+      "tags": [
+        "历史人物",
+        "角色一致性",
+        "多场景叙事",
+        "15 秒镜头段落"
+      ],
+      "stats": [
+        {
+          "value": "12",
+          "label": "分段镜头"
+        },
+        {
+          "value": "9:16",
+          "label": "竖屏画幅"
+        },
+        {
+          "value": "1907",
+          "label": "故事年代"
+        }
+      ],
+      "cover": "./assets/images/qiujin-hero.jpg",
+      "coverAlt": "秋瑾在旧宅中的人物设定画面",
+      "coverCaption": "角色设定 / CHARACTER DESIGN",
+      "layout": "portrait",
+      "video": {
+        "src": "./assets/videos/qiujin-classroom.mp4",
+        "poster": "./assets/images/qiujin-ayuan.jpg",
+        "label": "片段 / 学堂对话",
+        "index": "VIDEO 01"
+      },
+      "gallery": [
+        {
+          "image": "./assets/images/qiujin-study.jpg",
+          "alt": "秋瑾旧宅书房与小院门场景",
+          "caption": "SCENE / 旧宅空间"
+        },
+        {
+          "image": "./assets/images/qiujin-school.jpg",
+          "alt": "1907 年绍兴学堂教室场景",
+          "caption": "SCENE / 绍兴学堂"
+        },
+        {
+          "image": "./assets/images/qiujin-ayuan.jpg",
+          "alt": "阿沅角色设定",
+          "caption": "CHARACTER / 阿沅"
+        }
+      ]
+    },
+    {
+      "number": "02",
+      "kicker": "都市悬疑 · 氛围叙事",
+      "title": "人间不奉神",
+      "english": "NO GODS IN THE HUMAN WORLD",
+      "description": "失踪三年的父亲在雨夜来电，窗外却出现无脸的黑衣人。作品从一通电话建立不安，用冷色窗光、手机光源与空间纵深控制信息释放，让超自然危机逐步侵入日常私人空间。",
+      "tags": [
+        "都市悬疑",
+        "雨夜氛围",
+        "镜头连续性",
+        "超自然设定"
+      ],
+      "stats": [
+        {
+          "value": "1",
+          "label": "核心场景"
+        },
+        {
+          "value": "3+",
+          "label": "角色与异象"
+        },
+        {
+          "value": "冷光",
+          "label": "视觉基调"
+        }
+      ],
+      "cover": "./assets/images/humanity-hero.jpg",
+      "coverAlt": "《人间不奉神》雨夜接来电画面",
+      "coverCaption": "首场戏 / OPENING SCENE",
+      "layout": "landscape",
+      "video": {
+        "src": "./assets/videos/humanity-rain.mp4",
+        "poster": "./assets/images/humanity-hero.jpg",
+        "label": "片段 / 雨夜来电",
+        "index": "VIDEO 02"
+      },
+      "gallery": [
+        {
+          "image": "./assets/images/humanity-bedroom.jpg",
+          "alt": "雨夜都市极简卧室俯视场景",
+          "caption": "SCENE / 雨夜卧室"
+        },
+        {
+          "image": "./assets/images/humanity-figure.jpg",
+          "alt": "陆沉舟角色三视图",
+          "caption": "CHARACTER / 陆沉舟"
+        },
+        {
+          "image": "./assets/images/humanity-blackcoat.jpg",
+          "alt": "黑衣雨衣人角色设定",
+          "caption": "CHARACTER / 黑衣人"
+        }
+      ]
+    },
+    {
+      "number": "03",
+      "kicker": "当代家庭 · 情绪表演",
+      "title": "都是为你好",
+      "english": "FOR YOUR OWN GOOD",
+      "description": "在熟悉的家庭客厅里，一句“都是为你好”连接起代际之间的关心、压力与无法说出口的边界。创作重点是人物表情反应、对白节奏和生活空间细节，让冲突在克制的日常中自然发生。",
+      "tags": [
+        "家庭关系",
+        "对白短片",
+        "声音表演",
+        "生活化场景"
+      ],
+      "stats": [
+        {
+          "value": "4",
+          "label": "家庭成员"
+        },
+        {
+          "value": "15s",
+          "label": "竖屏成片"
+        },
+        {
+          "value": "对白",
+          "label": "声音驱动"
+        }
+      ],
+      "cover": "./assets/images/family-hero.jpg",
+      "coverAlt": "家庭对话短片中的林悦与长辈",
+      "coverCaption": "人物关系 / RELATIONSHIPS",
+      "layout": "landscape",
+      "video": {
+        "src": "./assets/videos/family-15s.mp4",
+        "poster": "./assets/images/family-hero.jpg",
+        "label": "片段 / 家庭对话",
+        "index": "VIDEO 03"
+      },
+      "gallery": [
+        {
+          "image": "./assets/images/family-room.jpg",
+          "alt": "家庭客厅场景全景",
+          "caption": "SCENE / 家庭客厅"
+        },
+        {
+          "image": "./assets/images/family-linyue.jpg",
+          "alt": "林悦角色三视图",
+          "caption": "CHARACTER / 林悦"
+        },
+        {
+          "image": "./assets/images/family-mother.jpg",
+          "alt": "母亲角色三视图",
+          "caption": "CHARACTER / 母亲"
+        }
+      ]
+    }
+  ],
+  "method": {
+    "label": "WORKFLOW",
+    "title": "创作方法",
+    "intro": "先确定故事和视觉规则，再生成素材。每一轮生成都以人物面容、服装、景别和轴线为校验点，减少后续镜头之间的漂移，让作品能够持续发展成完整短片。",
+    "steps": [
+      {
+        "index": "01",
+        "title": "叙事拆解",
+        "description": "明确人物目标、冲突节点与镜头时长。"
+      },
+      {
+        "index": "02",
+        "title": "视觉设定",
+        "description": "建立人物、服装、场景与光线基准。"
+      },
+      {
+        "index": "03",
+        "title": "分镜设计",
+        "description": "规划轴线、景别、动作衔接与情绪递进。"
+      },
+      {
+        "index": "04",
+        "title": "视频生成",
+        "description": "锁定关键帧，控制表演和镜头运动。"
+      },
+      {
+        "index": "05",
+        "title": "声音剪辑",
+        "description": "配合对白、环境声与节奏完成叙事。"
+      },
+      {
+        "index": "06",
+        "title": "成片校验",
+        "description": "检查连续性、画面细节与观看节奏。"
+      }
+    ],
+    "capabilities": [
+      {
+        "title": "故事与脚本",
+        "description": "从主题、人物关系到分镜节奏的结构化表达。"
+      },
+      {
+        "title": "一致性与控制",
+        "description": "维持角色面容、服装、场景和镜头轴线。"
+      },
+      {
+        "title": "视觉资产",
+        "description": "人物三视图、场景概念图与关键帧设计。"
+      },
+      {
+        "title": "生成与后期",
+        "description": "视频生成、对白、环境声和竖屏成片整合。"
+      }
+    ]
+  },
+  "contact": {
+    "label": "ABOUT THIS PORTFOLIO",
+    "title": "用一套可执行的视觉规则，把想法做成能被看见的故事。",
+    "description": "本作品集精选自 AI 影像学习与创作期间完成的三组项目。页面中的图片均为角色、场景与关键帧资产，视频为对应作品片段。",
+    "email": "1835040333@qq.com",
+    "emailLabel": "合作联系",
+    "footerNote": "角色设定 · 场景资产 · 分镜短片"
+  }
+}

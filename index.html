@@ -2,8 +2,11 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="AI 影像作品集，包含历史叙事、都市悬疑与家庭对话三类短片创作。">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#171717">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%23171717'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Georgia,serif' font-size='30' fill='%23f2eee5'%3EA%3C/text%3E%3C/svg%3E">
   <title>AI 影像作品集</title>
   <style>
     :root {
@@ -468,6 +471,16 @@
       color: rgba(255,255,255,0.52);
     }
 
+    .video-empty {
+      display: grid;
+      min-height: 420px;
+      aspect-ratio: 9 / 16;
+      place-items: center;
+      color: rgba(255,255,255,0.4);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+    }
+
     .detail-gallery {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -634,6 +647,38 @@
       background: var(--line);
     }
 
+    .contact-inline {
+      margin-top: 34px;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--ink);
+      transition: color 180ms ease, border-color 180ms ease;
+    }
+
+    .contact-link:hover,
+    .contact-link:focus-visible {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .contact-link span {
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+    }
+
+    .contact-link strong {
+      font-family: var(--serif);
+      font-size: clamp(18px, 2.2vw, 26px);
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+
     footer {
       padding: 24px clamp(22px, 5vw, 76px);
       color: rgba(255,255,255,0.52);
@@ -644,10 +689,17 @@
 
     .footer-inner {
       display: flex;
+      align-items: center;
       justify-content: space-between;
       gap: 20px;
       max-width: 1440px;
       margin: 0 auto;
+    }
+
+    .admin-entry {
+      margin-left: auto;
+      color: rgba(255,255,255,0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.28);
     }
 
     .reveal {
@@ -780,7 +832,11 @@
       }
 
       .footer-inner {
-        flex-direction: column;
+        flex-wrap: wrap;
+      }
+
+      .admin-entry {
+        margin-left: 0;
       }
     }
 
@@ -1013,7 +1069,8 @@
   <footer>
     <div class="footer-inner">
       <span>AI IMAGE PORTFOLIO / 2026</span>
-      <span>角色设定 · 场景资产 · 分镜短片</span>
+      <span class="footer-note">角色设定 · 场景资产 · 分镜短片</span>
+      <a class="admin-entry" href="./admin.html">内容管理</a>
     </div>
   </footer>
 
@@ -1043,5 +1100,6 @@
       reveals.forEach((element) => element.classList.add("visible"));
     }
   </script>
+  <script src="./site.js"></script>
 </body>
 </html>
